@@ -49,23 +49,27 @@
             flex-wrap: wrap;
         }
 
-        .logo-placeholder {
-            width: 120px;
-            height: 80px;
-            background: rgba(255,255,255,0.15);
-            border: 2px dashed rgba(255,255,255,0.5);
+        .logo-container {
+            background: rgba(255,255,255,0.95);
+            padding: 1rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
             display: flex;
             align-items: center;
             justify-content: center;
-            border-radius: 8px;
-            font-size: 0.8rem;
-            text-align: center;
-            transition: all 0.3s ease;
         }
 
-        .logo-placeholder:hover {
-            background: rgba(255,255,255,0.25);
-            transform: translateY(-2px);
+        .logo-container:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+        }
+
+        .logo {
+            height: 60px;
+            width: auto;
+            max-width: 150px;
+            object-fit: contain;
         }
 
         .header-content {
@@ -328,10 +332,13 @@
                 gap: 1rem;
             }
 
-            .logo-placeholder {
-                width: 100px;
-                height: 60px;
-                font-size: 0.7rem;
+            .logo-container {
+                padding: 0.75rem;
+            }
+
+            .logo {
+                height: 45px;
+                max-width: 120px;
             }
         }
 
@@ -360,9 +367,15 @@
     <header>
         <div class="container">
             <div class="logo-section">
-                <div class="logo-placeholder">Asia Connect Logo</div>
-                <div class="logo-placeholder">EU Logo</div>
-                <div class="logo-placeholder">TEIN Logo</div>
+                <div class="logo-container">
+                    <img src="images/logos/asia-connect-logo.png" alt="Asia Connect" class="logo">
+                </div>
+                <div class="logo-container">
+                    <img src="images/logos/eu-logo.png" alt="European Union" class="logo">
+                </div>
+                <div class="logo-container">
+                    <img src="images/logos/tein-logo.png" alt="TEIN Cooperation Center" class="logo">
+                </div>
             </div>
             <div class="header-content">
                 <h1>SecureAsia</h1>
