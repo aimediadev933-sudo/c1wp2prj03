@@ -1,1 +1,562 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SecureAsia: AsiaConnect Security Training Workshop</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
+        :root {
+            --primary: #F28C28;
+            --secondary: #E88C2D;
+            --body-bg: #FCF5EC;
+            --text: #1D1D1B;
+            --secondary-dark: #9F4B14;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--text);
+            background-color: var(--body-bg);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        header {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 2rem 0;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+        }
+
+        .logo-section {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 2rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .logo-placeholder {
+            width: 120px;
+            height: 80px;
+            background: rgba(255,255,255,0.15);
+            border: 2px dashed rgba(255,255,255,0.5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 8px;
+            font-size: 0.8rem;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .logo-placeholder:hover {
+            background: rgba(255,255,255,0.25);
+            transform: translateY(-2px);
+        }
+
+        .header-content {
+            text-align: center;
+        }
+
+        .header-content h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+            font-weight: 700;
+        }
+
+        .header-content .subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+
+        .workshop-info {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-top: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .info-item {
+            background: rgba(255,255,255,0.1);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-weight: 500;
+        }
+
+        /* Navigation */
+        nav {
+            background: var(--secondary-dark);
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 2rem;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        nav a:hover {
+            background: var(--primary);
+        }
+
+        /* Main Content */
+        main {
+            padding: 3rem 0;
+        }
+
+        .section {
+            margin-bottom: 3rem;
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            animation: fadeInUp 0.6s ease;
+        }
+
+        .section h2 {
+            color: var(--primary);
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+            border-bottom: 3px solid var(--secondary);
+            padding-bottom: 0.5rem;
+        }
+
+        .section h3 {
+            color: var(--secondary-dark);
+            margin: 1.5rem 0 0.75rem 0;
+        }
+
+        /* Overview Cards */
+        .overview-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .overview-card {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 2rem;
+            border-radius: 15px;
+            text-align: center;
+            transform: translateY(0);
+            transition: transform 0.3s ease;
+        }
+
+        .overview-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .overview-card h3 {
+            color: white;
+            margin-bottom: 1rem;
+        }
+
+        /* Activities Timeline */
+        .activities-timeline {
+            position: relative;
+            margin: 2rem 0;
+        }
+
+        .activity-day {
+            background: white;
+            margin: 1.5rem 0;
+            padding: 1.5rem;
+            border-left: 4px solid var(--primary);
+            border-radius: 0 10px 10px 0;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+        }
+
+        .activity-day h4 {
+            color: var(--primary);
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        /* Countries Grid */
+        .countries-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .country-item {
+            background: var(--primary);
+            color: white;
+            padding: 0.75rem;
+            text-align: center;
+            border-radius: 8px;
+            font-weight: 500;
+            transition: transform 0.3s ease;
+        }
+
+        .country-item:hover {
+            transform: scale(1.05);
+            background: var(--secondary-dark);
+        }
+
+        /* Outcomes */
+        .outcomes-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+
+        .outcome-item {
+            background: var(--body-bg);
+            padding: 1.5rem;
+            border-radius: 10px;
+            border: 2px solid var(--secondary);
+        }
+
+        .outcome-item h4 {
+            color: var(--primary);
+            margin-bottom: 0.75rem;
+        }
+
+        /* SDGs */
+        .sdg-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .sdg-item {
+            background: var(--secondary);
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 25px;
+            font-weight: 600;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--secondary-dark);
+            color: white;
+            text-align: center;
+            padding: 2rem 0;
+            margin-top: 3rem;
+        }
+
+        .social-links {
+            margin: 1rem 0;
+        }
+
+        .social-links a {
+            color: white;
+            text-decoration: none;
+            margin: 0 1rem;
+            font-weight: 500;
+        }
+
+        .social-links a:hover {
+            color: var(--primary);
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .header-content h1 {
+                font-size: 2rem;
+            }
+
+            .workshop-info {
+                gap: 1rem;
+            }
+
+            nav ul {
+                gap: 1rem;
+            }
+
+            .section {
+                padding: 1.5rem;
+            }
+
+            .overview-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .countries-grid {
+                grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+            }
+
+            .logo-section {
+                gap: 1rem;
+            }
+
+            .logo-placeholder {
+                width: 100px;
+                height: 60px;
+                font-size: 0.7rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 0 15px;
+            }
+
+            .header-content h1 {
+                font-size: 1.75rem;
+            }
+
+            .workshop-info {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            nav ul {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="logo-section">
+                <div class="logo-placeholder">Asia Connect Logo</div>
+                <div class="logo-placeholder">EU Logo</div>
+                <div class="logo-placeholder">TEIN Logo</div>
+            </div>
+            <div class="header-content">
+                <h1>SecureAsia</h1>
+                <p class="subtitle">AsiaConnect Security Training Workshop</p>
+                <div class="workshop-info">
+                    <div class="info-item">October 23-25, 2017</div>
+                    <div class="info-item">Cyberjaya, Malaysia</div>
+                    <div class="info-item">WP2 - 1st Call</div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <nav>
+        <div class="container">
+            <ul>
+                <li><a href="#overview">Overview</a></li>
+                <li><a href="#activities">Activities</a></li>
+                <li><a href="#partners">Partners</a></li>
+                <li><a href="#outcomes">Outcomes</a></li>
+                <li><a href="#future">Future</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main>
+        <div class="container">
+            <section id="overview" class="section">
+                <h2>Workshop Overview</h2>
+                <p>The SecureAsia Workshop aimed to strengthen the cybersecurity capabilities of network engineers and administrators across AsiaConnect partner countries. This three-day intensive training was jointly organized by Universiti Sains Malaysia (USM), Malaysian Research and Education Network (MYREN), and University of Hamburg (UH), Germany.</p>
+                
+                <div class="overview-grid">
+                    <div class="overview-card">
+                        <h3>13 Countries</h3>
+                        <p>Beneficiary AsiaConnect partner countries participated in this comprehensive cybersecurity training</p>
+                    </div>
+                    <div class="overview-card">
+                        <h3>3 Days</h3>
+                        <p>Intensive training combining lectures, demonstrations, and hands-on laboratory sessions</p>
+                    </div>
+                    <div class="overview-card">
+                        <h3>NREN Focus</h3>
+                        <p>Specialized training for National Research and Education Network operators</p>
+                    </div>
+                </div>
+
+                <h3>Beneficiary Countries</h3>
+                <div class="countries-grid">
+                    <div class="country-item">Afghanistan</div>
+                    <div class="country-item">Bangladesh</div>
+                    <div class="country-item">Bhutan</div>
+                    <div class="country-item">Cambodia</div>
+                    <div class="country-item">India</div>
+                    <div class="country-item">Laos</div>
+                    <div class="country-item">Myanmar</div>
+                    <div class="country-item">Nepal</div>
+                    <div class="country-item">Pakistan</div>
+                    <div class="country-item">Philippines</div>
+                    <div class="country-item">Sri Lanka</div>
+                    <div class="country-item">Thailand</div>
+                    <div class="country-item">Vietnam</div>
+                </div>
+            </section>
+
+            <section id="activities" class="section">
+                <h2>Training Activities</h2>
+                <div class="activities-timeline">
+                    <div class="activity-day">
+                        <h4>Day 1: Security Foundations</h4>
+                        <p>Covered physical security, malware, botnets, DDoS attacks, and social engineering through comprehensive lectures and live demonstrations.</p>
+                    </div>
+                    <div class="activity-day">
+                        <h4>Day 2: Detection & Defense</h4>
+                        <p>Linux/networking refresher followed by practical sessions on IDS, honeypots, sandboxes, and access control systems.</p>
+                    </div>
+                    <div class="activity-day">
+                        <h4>Day 3: Vulnerabilities & Hands-On</h4>
+                        <p>Participants engaged in vulnerability analysis, penetration testing, and competed in a Capture-the-Flag (CTF) challenge.</p>
+                    </div>
+                </div>
+
+                <h3>Additional Activities</h3>
+                <ul style="margin-top: 1rem; padding-left: 2rem;">
+                    <li>Group photo sessions and certificate presentations</li>
+                    <li>Official social dinner for informal networking</li>
+                    <li>Creation of dedicated social media presence</li>
+                    <li>Public-facing webpage for knowledge sharing</li>
+                </ul>
+            </section>
+
+            <section id="partners" class="section">
+                <h2>Partner Organizations</h2>
+                <div class="overview-grid">
+                    <div style="background: white; color: var(--text); border: 2px solid var(--primary);" class="overview-card">
+                        <h3>Universiti Sains Malaysia (USM)</h3>
+                        <p>Host institution providing venue and local coordination</p>
+                    </div>
+                    <div style="background: white; color: var(--text); border: 2px solid var(--primary);" class="overview-card">
+                        <h3>Malaysian Research and Education Network (MYREN)</h3>
+                        <p>Technical expertise and regional network coordination</p>
+                    </div>
+                    <div style="background: white; color: var(--text); border: 2px solid var(--primary);" class="overview-card">
+                        <h3>University of Hamburg (UH), Germany</h3>
+                        <p>International expertise and training methodology</p>
+                    </div>
+                </div>
+            </section>
+
+            <section id="outcomes" class="section">
+                <h2>Key Outcomes</h2>
+                <div class="outcomes-list">
+                    <div class="outcome-item">
+                        <h4>Improved Technical Skills</h4>
+                        <p>Participants learned to secure NREN infrastructure using tools like IDS, honeypots, firewalls, and ethical hacking techniques.</p>
+                    </div>
+                    <div class="outcome-item">
+                        <h4>Enhanced Regional Collaboration</h4>
+                        <p>Created a strong network among cybersecurity professionals across 13 AsiaConnect countries.</p>
+                    </div>
+                    <div class="outcome-item">
+                        <h4>Established Training Framework</h4>
+                        <p>Delivered a replicable cybersecurity training model combining theory, practice, and peer learning.</p>
+                    </div>
+                </div>
+
+                <h3>Sustainable Development Goals</h3>
+                <div class="sdg-list">
+                    <div class="sdg-item">SDG 4 - Quality Education</div>
+                    <div class="sdg-item">SDG 9 - Industry, Innovation and Infrastructure</div>
+                    <div class="sdg-item">SDG 17 - Partnerships for the Goals</div>
+                </div>
+            </section>
+
+            <section id="future" class="section">
+                <h2>Future Directions</h2>
+                <div class="outcomes-list">
+                    <div class="outcome-item">
+                        <h4>Extended Workshop Duration</h4>
+                        <p>Increase to five days to cover advanced topics and allow more hands-on practice time.</p>
+                    </div>
+                    <div class="outcome-item">
+                        <h4>Better Participant Screening</h4>
+                        <p>Ensure nominees have the required technical background to fully benefit from the training.</p>
+                    </div>
+                    <div class="outcome-item">
+                        <h4>Early Engagement Activities</h4>
+                        <p>Start future workshops with welcome cocktail receptions to improve interaction from day one.</p>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <h3>Connect With Us</h3>
+            <div class="social-links">
+                <a href="https://www.facebook.com/secureasia" target="_blank">Facebook</a>
+                <a href="https://myren.net.my/teinsecureasia/" target="_blank">Official Website</a>
+            </div>
+            <p>&copy; 2017 SecureAsia Workshop. Part of the AsiaConnect Programme.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('nav a').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                target.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+            });
+        });
+
+        // Add animation on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.animation = 'fadeInUp 0.6s ease forwards';
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.section').forEach(section => {
+            observer.observe(section);
+        });
+    </script>
+</body>
+</html>
